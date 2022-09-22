@@ -1,0 +1,110 @@
+[
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 1,
+        "fields": {
+            "watched": false,
+            "title" : "Film 1",
+            "rating": 5,
+            "release_date": "1 Januari 2010",
+            "review": "Tidak ada review"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 2,
+        "fields": {
+            "watched": true,
+            "title" : "Film 2",
+            "rating": 5,
+            "release_date": "2 Februari 2020",
+            "review": "Film kedua"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 3,
+        "fields": {
+            "watched": false,
+            "title" : "Film 3",
+            "rating": 4,
+            "release_date": "Belum dirilis",
+            "review": "Belum ada review"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 4,
+        "fields": {
+            "watched": false,
+            "title" : "Film 4",
+            "rating": 5,
+            "release_date": "Belum dirilis",
+            "review": "Belum ada review"
+        }
+    },
+    {
+		"model": "mywatchlist.mywatchlist",
+        "pk": 5,
+        "fields": {
+            "watched": false,
+            "title" : "Film 5",
+            "rating": 4,
+            "release_date": "Belum dirilis",
+            "review": "Belum ada review"
+        }
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 6,
+        "fields": {
+            "watched": false,
+            "title" : "Film 6",
+            "rating": 4,
+            "release_date": "Belum dirilis",
+            "review": "Belum ada review"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 3,
+        "fields": {
+            "watched": false,
+            "title" : "Film 7",
+            "rating": 4,
+            "release_date": "Belum dirilis",
+            "review": "Belum ada review"
+        }
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 3,
+        "fields": {
+            "watched": false,
+            "title" : "Film 8",
+            "rating": 4,
+            "release_date": "Belum dirilis",
+            "review": "Belum ada review"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 9,
+        "fields": {
+            "watched": false,
+            "title" : "Film 9",
+            "rating": 3,
+            "release_date": "Belum dirilis",
+            "review": "Belum ada review"
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 10,
+        "fields": {
+            "watched": false,
+            "title" : "Film 10",
+            "rating": 4,
+            "release_date": "Belum dirilis",
+            "review": "Belum ada review"
+        }
+    }
+]
