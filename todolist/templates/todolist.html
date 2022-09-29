@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Todolist Tugas 4 PBP</title>
+{% endblock meta %}
+
+{% block content %}  
+
+<button><a href="{% url 'todolist:logout_user' %}">Logout</a></button>
+
+
+<h3>Nama: {{username}}</h3>
+<table>
+    <tr>
+      <th>Tanggal Penambahan</th>
+      <th>Todolist</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+    {% comment %} Add the data below this line {% endcomment %}
+
+    {% for item in list_todo %}
+    <tr>
+      <th>{{item.date}}</th>
+      <th>{{item.title}}</th>
+      <th>{{item.description}}</th>
+      <th>
+        {% if item.is_finished %}
+        Tugas telah selesai
+        {% else %}
+        Tugas masih belum selesai
+        {% endif%}
+        <th><button><a href="{% url 'todolist:update' item.id %}">Update</a></button></th>
+        <th><button><a href="{% url 'todolist:delete' item.id %}">Delete</a></button></th>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<br></br>
+<button><a href="{% url 'todolist:addtask' %}">Tambah Task Baru</a></button>
+{% endblock content %}
+
