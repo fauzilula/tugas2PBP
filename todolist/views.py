@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse
 from todolist.forms import *
 from django.core import serializers
 from django.shortcuts import render
