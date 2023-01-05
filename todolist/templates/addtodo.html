@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Create new task | Todolist</title>
+{% endblock meta %}
+
+{% block content %}
+
+<style>
+  * {
+    text-align:center;
+    vertical-align: middle;
+    color: #2e3c4d;
+  }
+  td, input, textarea {
+    text-align: left; 
+  }
+  form {
+    border-radius:0.5em; 
+    box-shadow: 0px 0px 7px rgba(128, 128, 128, 0.211);   
+    background-color: rgba(178, 178, 178, 0.211);   
+    margin: auto;
+    width: 270px;
+    padding: 1em;
+    border-radius: 1em;
+  }
+  h1 {
+    color:#413f76;
+  }
+  body {
+    background-image: url(https://img.freepik.com/free-vector/gradient-blur-pink-blue-abstract-background_53876-117324.jpg);
+  }
+  .create-task {
+    padding-top:10%;
+    padding-bottom: 20%;
+  }
+  .logout {
+    background-color: rgba(255, 255, 255, 0.112); 
+    border-color: rgba(255, 255, 255, 0.112); 
+    box-shadow: 0px 0px 20px rgba(128, 128, 128, 0.3);
+    color: #2e3c4d;
+  } 
+    
+  .submit {
+    margin-top: 0.5em;
+    border-radius: 0.5em;
+    font-weight: 1000;
+    color:rgba(255, 255, 255, 0.966);
+    background-color:#5755a2;
+    border-color: transparent;
+    box-shadow: 0px 0px 20px rgba(128, 128, 128, 0.3);
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg">
+   <div class="container-fluid">
+      <a></a>
+      <a class="btn btn-primary logout" href="{% url 'todolist:logout' %}">Logout</a>
+    </div>
+</nav>
+
+<div class = "create-task">
+    <h1>Create New Task</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Task Title: </td>
+                <td><input type="text" name="title" placeholder="Title" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Description: </td>
+                <td><textarea type="text" name="description" placeholder="Description" class="form-control"></textarea></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="submit" name="submit" value="Create Task" class="submit"/></td>  
+            </tr>
+        </table>
+    </form>
+
+</div>
+
+{% endblock content %}

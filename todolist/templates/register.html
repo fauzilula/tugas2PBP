@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Register | Todolist</title>
+{% endblock meta %}
+
+{% block content %}  
+
+
+<style>
+  * {
+    text-align: left; 
+    vertical-align:text-top;
+  }
+  body {
+    background-image: url(https://img.freepik.com/free-vector/freeform-gradient-is-background-image-with-beautiful-color-combination-illustration_1258-49111.jpg?w=996&t=st=1672875561~exp=1672876161~hmac=12ade52f18c35507d323272ff2f84183a725dce3b0bbc8fe3dc843071172c606);
+    background-size: cover;
+  }  
+  form {
+    margin:auto; 
+    width: 75%; 
+    padding: 2%; 
+    border-radius: 3em;  
+    background-color: rgba(215, 215, 215, 0.277); 
+    
+  }
+  h1 {
+    text-align: center;
+    color:#1a1852;
+    padding-bottom:2%;
+  }
+  
+  
+ 
+</style>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a></a>
+    <a class="btn btn-primary login" href="{% url 'todolist:login_user' %}">Login</a>
+  </div>
+</nav>
+
+<div class="register">
+    
+  <h1>Formulir Registrasi</h1>  
+    <form method="POST"" >  
+      {% csrf_token %}  
+      <table>  
+        {{ form.as_table }}  
+
+        <td><input class="btn btn-info" type="submit" name="submit" value="Daftar"/></td>  
+      </table>  
+    </form>
+      
+  {% if messages %}  
+    <ul>   
+      {% for message in messages %}  
+        <li>{{ message }}</li>  
+      {% endfor %}  
+    </ul>   
+  {% endif %}
+  
+</div>  
+
+{% endblock content %}

@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Todolist Tugas 6 PBP</title>
+{% endblock meta %}
+
+{% block content %}
+<!doctype html>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+<style>
+  * { 
+    color: #2e3c4d;
+    text-align: center;
+  }
+  h1.tes {
+    text-decoration-line: underline;
+    font-family: Sofia;
+    color:#1c329f;
+    background-color: transparent ;
+    border-color: transparent;
+
+  }
+  li {
+  width: 140px;
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 4px;
+ 
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  top : -35px;
+  right : 80px;
+  
+}
+  body {
+    background-image: url(https://img.freepik.com/free-vector/pastel-floral-botanical-yearly-calendar-printable-vector-template-set_53876-156418.jpg?w=900&t=st=1672870846~exp=1672871446~hmac=0fd6739bc53fb069ba9a3002e0a9528bf138ca35fe5d32bcaf0945dcaa8da8aa);
+    background-size: 100;
+  }
+  
+  .done {
+    background-color: rgba(3, 61, 30, 0.35);
+    border-color: transparent;
+  }
+  
+  .create {
+    font-weight: 1000;
+    color:rgba(255, 255, 255, 0.966);
+    background-color: #767ae4be;
+    border-color: transparent;
+    box-shadow: 0px 0px 20px rgba(128, 128, 128, 0.3);
+
+  }
+
+  .logout {
+    background-color: rgba(255, 255, 255, 0.112); 
+   
+    color: #234063;
+  } 
+  .date{
+    font-size: x-small;
+  }
+  .delete {
+    background-color:#0000002d;
+    border-color:transparent;
+  }
+ 
+  
+  .modal-background-color {
+    border-color: transparent;
+    width: 300px;
+    padding: 1em;
+  }
+</style>
+
+<nav class="navbar navbar navbar-expand-lg navbar-light ">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"> Name : {{ username }} </a>
+    <a class="btn btn-primary logout" href="{% url 'todolist:logout_user' %}">Logout</a>
+  </div>
+</nav>
+
+<body>
+<div style="padding-top: 1%; padding-bottom: 3%;" >
+  <h1 class="tes"> ToDoList </h1>
+</div>
+
+<!-- Button trigger modal -->
+<li><button type="button" class="btn btn-primary mb-5 create" data-bs-toggle="modal" data-bs-target="#FormModal" >Add Task </button></li>
+</body>
+
+<!-- Modal -->
+<div class="modal" id="FormModal" aria-labelledby="FormModalLabel" >
+  <div class="modal-dialog modal-background-color">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="FormModalLabel">Add new task</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cancel"></button>
+      </div>
+      <div class="modal-body" style="text-align:left;">
+        {% csrf_token %}
+        <label>Title:</label><br>
+        <input id="title" class="appearance-none border rounded py-2 px-2 mx-1 " type="text" name="title" placeholder="Title"><br>
+        <label>Description:</label><br>
+        <input id="description" class="appearance-none border rounded py-2 px-2 mx-1 " type="description" name="description" placeholder="Task Description">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button id="add_btn" type="button" class="btn btn-primary create" id="add-task" data-bs-dismiss="modal">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+
+<div class="row" id="todolist"></div>
+
+<script>
+  $(document).ready(function(){
+      $.get("/todolist/json/", function(data) {
+          for (i=0; i<data.length; i++){
+              $("#todolist").append(`
+              <div id="${data[i].id}" class="col-md-5 col-lg-3 mb-3">
+                  <div class="card">
+                    <div class="card-body column">
+                      <h5 class="card-title">${data[i].fields.title}</h5>
+                      <p class="card-text date">${data[i].fields.date}</p>
+                      <p class="card-text">${data[i].fields.description}</p>
+                      <div class="mt-auto">
+                        <a href="/todolist/delete/${data[i].pk}" class="btn btn-primary delete mb-2">Delete</a>
+                        ${data[i].fields.is_finished ?
+                          `<a href="/todolist/update/${data[i].pk}" class="btn btn-primary done mb-2">Done</a>` :
+                          `<a href="/todolist/update/${data[i].pk}" class="btn btn-danger mb-2">Update</a>`}
+                      </div>
+                    </div>
+                  </div>
+              </div>`)
+          }
+      });
+
+
+      $("#add_btn").click(function(){
+        $.post("/todolist/add/", {
+          title: $("#title").val(),
+          description: $("#description").val()
+        },
+        function(res){
+          
+              $("#todolist").append(`
+              <div id="${res.id}--task" class="col-md-5 col-lg-3 mb-3">
+                    <div class="card">
+                      <div class="card-body ">
+                        <h5 class="card-title">${res.fields.title}</h5>
+                        <p class="card-text mb-1 date">${res.fields.date}</p>
+                        <p class="card-text">${res.fields.description}</p>
+                        <div class="mt-auto">
+                          <a href="/todolist/delete/${res.id}" class="btn btn-primary delete" >Delete</a>
+                          ${res.fields.is_finished ?
+                            `<a href="/todolist/update/${res.id}" class="btn btn-primary done">Done</a>` :
+                            `<a href="/todolist/update/${res.id}" class="btn btn-danger ">Update</a>`}
+                        </div>
+                      </div>
+                    </div>
+                </div>`);
+
+              
+          }
+        )
+      })
+  });
+  
+</script>
+
+ {% endblock content %}

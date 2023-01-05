@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+
+<title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+<style>
+  * {
+    text-align:center;
+    vertical-align: middle;
+    color: #323f4f;
+  }
+  td, input {
+    text-align: left; 
+  }
+  body {
+    background-image: url(https://img.freepik.com/free-vector/abstract-fluid-neon-color-3d-effect-background-banner-design-multipurpose_1340-16669.jpg?w=1060&t=st=1672875413~exp=1672876013~hmac=6553c6c515031f4f3bd1b7445353ebc1489cc490bd42c6c44d7f8198b53b4403);
+    background-size: cover;
+}
+  form {
+    border-radius:0.5em; 
+    box-shadow: 0px 0px 10px rgba(107, 106, 106, 0.211);   
+    background-color: rgba(172, 169, 169, 0.211);   
+    margin: auto;
+    width: 300px;
+    padding: 1em;
+    border-radius: 1em;
+  }
+  
+ 
+  .login {
+    padding: 10%;
+  }
+</style>
+
+<div class="login">
+  <h1>Login</h1>
+    <form method="POST" action="">
+      {% csrf_token %}
+      <table>
+        <tr>
+          <td>Username: </td>
+          <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+        </tr>
+                    
+        <tr>
+          <td>Password: </td>
+          <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+        </tr>
+
+        <tr>
+          <td></td>
+          <td><input class="btn login_btn btn-primary " type="submit" value="Login"></td>
+        </tr>
+      </table>
+    </form>
+
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  </br>
+  Belum mempunyai akun? <a href="{% url 'todolist:register' %}"> Register</a>
+
+</div>
+
+{% endblock content %}
